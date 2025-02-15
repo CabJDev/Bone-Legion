@@ -53,16 +53,13 @@ public class CameraMovement : MonoBehaviour
         xMovement = Input.GetAxisRaw("Horizontal");
         yMovement = Input.GetAxisRaw("Vertical");
 
-        if (!Application.isEditor) 
-        {
-            // Far left of the viewport starts at (0, 0) so we have to subtract by one so that the camera goes left
-            if (viewportPoint.x <= minMouseBoundaries.x) xMovement = -1 + viewportPoint.x;
-            else if (viewportPoint.x >= maxMouseBoundaries.x) xMovement = viewportPoint.x;
+        // Far left of the viewport starts at (0, 0) so we have to subtract by one so that the camera goes left
+        if (viewportPoint.x <= minMouseBoundaries.x) xMovement = -1 + viewportPoint.x;
+        else if (viewportPoint.x >= maxMouseBoundaries.x) xMovement = viewportPoint.x;
 
-            // Far bottom of the viewport starts at (0, 0) so we have to subtract by one so that the camera goes down
-            if (viewportPoint.y <= minMouseBoundaries.y) yMovement = -1 + viewportPoint.y;
-            else if (viewportPoint.y >= maxMouseBoundaries.y) yMovement = viewportPoint.y;
-        }
+        // Far bottom of the viewport starts at (0, 0) so we have to subtract by one so that the camera goes down
+        if (viewportPoint.y <= minMouseBoundaries.y) yMovement = -1 + viewportPoint.y;
+        else if (viewportPoint.y >= maxMouseBoundaries.y) yMovement = viewportPoint.y;
 
         mainCamera.transform.position += new Vector3(xMovement * sensitivity * Time.deltaTime, yMovement * sensitivity * Time.deltaTime, 0);
     }
